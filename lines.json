@@ -1,46 +1,46 @@
 {
   "special": {
     "212": [
-      "212. the dice finally said my name.",
-      "two, one, two. that's my signature.",
-      "212 — not luck. just home.",
-      "out of 216 rolls, this one's mine.",
-      "212. i knew you'd come back."
+      "the dice know me by heart.",
+      "some numbers feel like home.",
+      "out of 216, somehow this one."
     ],
     "121": [
-      "121 — 212's quiet twin.",
-      "one, two, one. my number in a mirror.",
-      "so close to 212 i can feel it."
+      "my number, seen in a mirror.",
+      "the same pieces, a different face.",
+      "familiar, from another angle."
     ],
     "211": [
-      "211. one step from my number.",
-      "two, one, one. almost home.",
-      "211 — 212 with a typo."
+      "one roll away from home.",
+      "almost, and yet unmistakable.",
+      "one number missing. still familiar."
     ],
     "112": [
-      "112. my numbers, shuffled.",
-      "one, one, two. the pieces of me.",
-      "112 — the right digits, wrong order."
+      "my number, rearranged.",
+      "the right pieces, finding their place.",
+      "the same meaning, in another order."
     ],
     "222": [
-      "all twos. the dice are on my side.",
-      "222. the two in me, three times.",
-      "two, two, two. my favorite echo."
+      "three twos. twice the meaning.",
+      "the echo of my favorite number.",
+      "when two becomes everything."
     ],
     "221": [
-      "221. my digits, almost in place.",
-      "two, two, one. close to my number."
+      "almost the number i call mine.",
+      "two twos, one step away.",
+      "close enough to feel familiar."
     ],
     "122": [
-      "122. a little bit of me in there.",
-      "one, two, two. my kind of roll."
+      "my number, finding another shape.",
+      "one beginning, two echoes.",
+      "a little closer to familiar."
     ],
     "111": [
-      "111. the one in 212, alone.",
-      "three ones. waiting for a two."
+      "all beginnings, no answer yet.",
+      "three ones, waiting for a two.",
+      "before the number, there was one."
     ]
   },
-
   "witty": {
     "111": "luck said no. three times. politely.",
     "222": "two, two, two. the dice are stuck.",
@@ -48,7 +48,6 @@
     "444": "four, four, four. the dice took a nap.",
     "555": "so close to six. three times. rude.",
     "666": "screenshot this, it won't happen again.",
-
     "123": "the dice are learning to count.",
     "124": "counting, but with a skip.",
     "125": "started slow, then showed off.",
@@ -69,7 +68,6 @@
     "346": "skipped five. five is upset.",
     "356": "almost a straight, but cooler.",
     "456": "top three. the dice are flexing.",
-
     "321": "countdown done. nothing launched.",
     "421": "falling, but with style.",
     "521": "five to one. what a drop.",
@@ -90,7 +88,6 @@
     "643": "tripped on the way down.",
     "653": "down, but not out.",
     "654": "so close to a perfect fall.",
-
     "112": "one, one, and a tiny rebellion.",
     "113": "the third die had other plans.",
     "114": "two ones walk into a four.",
@@ -121,7 +118,6 @@
     "663": "so close to glory.",
     "664": "two sixes and a fumble.",
     "665": "one away from legend status.",
-
     "122": "one changed its mind twice.",
     "133": "one walked in, threes took over.",
     "144": "one, then the fours moved in.",
@@ -152,7 +148,6 @@
     "633": "six cut itself in half.",
     "644": "six, then fours. calming down.",
     "655": "six, then fives. still good.",
-
     "121": "one went out and came right back.",
     "131": "one, three, one. a sandwich.",
     "141": "one-four-one. a lonely sandwich.",
@@ -183,7 +178,6 @@
     "636": "three in a six sandwich. yum.",
     "646": "four, guarded by sixes.",
     "656": "almost a full set of sixes.",
-
     "132": "up, down, nobody noticed.",
     "231": "a tiny mountain. adorable.",
     "142": "went up for no reason.",
@@ -224,7 +218,6 @@
     "562": "so close, then gone.",
     "563": "six was the main event.",
     "564": "peak performance, briefly.",
-
     "213": "tripped, then got up.",
     "214": "fell, bounced, kept going.",
     "215": "one in the middle. nobody saw.",
@@ -266,7 +259,6 @@
     "546": "four, then six wins.",
     "645": "four was a little shy."
   },
-
   "dev": {
     "111": "return 1; // again",
     "222": "assert dice == 2  # passed x3",
@@ -274,7 +266,6 @@
     "444": "const four = 4; // x3",
     "555": "off by one, three times.",
     "666": "max value reached. no notes.",
-
     "123": "sorted, accidentally.",
     "124": "powers of two, almost.",
     "125": "array.push(5) // why not",
@@ -295,7 +286,6 @@
     "346": "skipped 5 like a failed test.",
     "356": "almost sorted, no gaps.",
     "456": "top three, ascending. ship it.",
-
     "321": "countdown complete. deploying.",
     "421": "i--, i--, oops.",
     "521": "memory leak, but in reverse.",
@@ -316,7 +306,6 @@
     "643": "almost reverse-sorted.",
     "653": "throttling enabled.",
     "654": "reverse sorted. clean.",
-
     "112": "dupe detected, then 2.",
     "113": "[1, 1, 3] // needs unique()",
     "114": "duplicate key, then 4.",
@@ -347,7 +336,6 @@
     "663": "6, 6, then halved.",
     "664": "almost a full house.",
     "665": "so close to max x3.",
-
     "122": "first try, then retry, retry.",
     "133": "1, then 3 cached.",
     "144": "1 -> 4, persisted.",
@@ -378,7 +366,6 @@
     "633": "6 / 2 == 3. both of them.",
     "644": "max, then 4 cached.",
     "655": "max, then 5, 5. fine.",
-
     "121": "palindrome detected.",
     "131": "one-three-one. symmetric.",
     "141": "x == reverse(x) // true",
@@ -409,7 +396,6 @@
     "636": "a dip at index 1.",
     "646": "almost max, wrapped in max.",
     "656": "6, 5, 6. 99.9% uptime.",
-
     "132": "[1, 3, 2]. not sorted, oh well.",
     "231": "small peak at index 1.",
     "142": "local max: 4.",
@@ -450,7 +436,6 @@
     "562": "ran at max, then 2.",
     "563": "maxed out briefly.",
     "564": "top three, unordered.",
-
     "213": "dip, then recovery.",
     "214": "1 in the middle. edge case.",
     "215": "min value, handled.",
@@ -492,7 +477,6 @@
     "546": "4 is the min. still decent.",
     "645": "dip at index 1. high overall."
   },
-
   "soft": {
     "111": "small numbers, big mood.",
     "222": "twos today, and that's fine.",
@@ -500,7 +484,6 @@
     "444": "steady and solid, like a good chair.",
     "555": "almost there, and smiling anyway.",
     "666": "today's a good day, apparently.",
-
     "123": "one step at a time.",
     "124": "little steps, then a hop.",
     "125": "slow morning, good afternoon.",
@@ -521,7 +504,6 @@
     "346": "doing well, honestly.",
     "356": "nearly the top. nice view.",
     "456": "high spirits all around.",
-
     "321": "and... relax.",
     "421": "letting things go, gently.",
     "521": "a big exhale.",
@@ -542,7 +524,6 @@
     "643": "down for a cup of tea.",
     "653": "resting after the climb.",
     "654": "gently landing.",
-
     "112": "same old, then something new.",
     "113": "a quiet day, then a smile.",
     "114": "easy start, nice surprise.",
@@ -573,7 +554,6 @@
     "663": "lucky twice, calm after.",
     "664": "two wins and a small one.",
     "665": "nearly perfect, and that's nice.",
-
     "122": "a change, then calm.",
     "133": "found my rhythm.",
     "144": "settled in nicely.",
@@ -604,7 +584,6 @@
     "633": "half is plenty.",
     "644": "good, then settled.",
     "655": "still a great view.",
-
     "121": "went out, came home.",
     "131": "a little trip, then back.",
     "141": "a short adventure.",
@@ -635,7 +614,6 @@
     "636": "a calm center.",
     "646": "good, great, good.",
     "656": "so good, all of it.",
-
     "132": "small ups and downs.",
     "231": "a cute little hill.",
     "142": "a nice little high.",
@@ -676,7 +654,6 @@
     "562": "a high five moment.",
     "563": "a really good part.",
     "564": "quite the day.",
-
     "213": "a little stumble, then up.",
     "214": "bounced back nicely.",
     "215": "a rough start, then sunshine.",
