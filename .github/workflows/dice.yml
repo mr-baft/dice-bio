@@ -1,0 +1,67 @@
+name: Dice Bio
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"   # هر ۵ دقیقه (کمترین فاصله‌ای که گیت‌هاب اجازه می‌ده)
+  workflow_dispatch:         # دکمه‌ی اجرای دستی برای تست
+
+permissions:
+  actions: write             # فقط برای اینکه زمان‌بندی بعد از ۶۰ روز خاموش نشه
+
+concurrency:
+  group: dice-bio
+  cancel-in-progress: false
+
+jobs:
+  roll:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Install Telethon
+        run: pip install --quiet telethon
+
+      - name: Roll three dice
+        env:
+          API_ID: ${{ secrets.API_ID }}
+          API_HASH: ${{ secrets.API_HASH }}
+          SESSION: ${{ secrets.SESSION }}
+          BIO_TEMPLATE: ${{ vars.BIO_TEMPLATE }}
+        run: |
+          python - <<'EOF'
+          import os, random, asyncio
+          from telethon import TelegramClient
+          from telethon.sessions import StringSession
+          from telethon.tl.functions.account import UpdateProfileRequest
+          from telethon.errors import FloodWaitError
+
+          FACES = "⚀⚁⚂⚃⚄⚅"
+          dice = " ".join(random.choice(FACES) for _ in range(3))
+          template = os.environ.get("BIO_TEMPLATE") or "🎲 {dice}"
+          bio = template.replace("{dice}", dice)[:70]
+
+          async def main():
+              client = TelegramClient(
+                  StringSession(os.environ["SESSION"]),
+                  int(os.environ["API_ID"]),
+                  os.environ["API_HASH"],
+              )
+              await client.connect()
+              try:
+                  if not await client.is_user_authorized():
+                      raise SystemExit("SESSION is invalid or expired - make a new one with get_session.py")
+                  try:
+                      await client(UpdateProfileRequest(about=bio))
+                      print("Bio updated:", dice)
+                  except FloodWaitError as e:
+                      print(f"Telegram asked to wait {e.seconds}s - skipping this run")
+              finally:
+                  await client.disconnect()
+
+          asyncio.run(main())
+          EOF
+
+      - name: Keep schedule alive
+        if: github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/dice.yml/enable" || true
