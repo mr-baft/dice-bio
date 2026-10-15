@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 358
     steps:
+      - uses: actions/checkout@v4   # برای خوندن lines.json
+
       - name: Install Telethon
         run: pip install --quiet telethon
 
@@ -30,7 +32,7 @@ jobs:
           INTERVAL: ${{ vars.INTERVAL }}
         run: |
           python - <<'EOF'
-          import os, random, asyncio, time
+          import os, random, asyncio, time, json
           from datetime import datetime
           from zoneinfo import ZoneInfo
           from telethon import TelegramClient
@@ -40,7 +42,8 @@ jobs:
 
           FACES = "⚀⚁⚂⚃⚄⚅"
           TZ = ZoneInfo("Asia/Tehran")
-          template = os.environ.get("BIO_TEMPLATE") or "{time} - this time dice { {dice} }"
+          LINES = json.load(open("lines.json", encoding="utf-8"))   # سه دیتاست: witty / dev / soft
+          template = os.environ.get("BIO_TEMPLATE") or "{time} { {dice} } {line}"
           interval = max(30, int(os.environ.get("INTERVAL") or 60))
           deadline = time.time() + 350 * 60   # چند دقیقه قبل از سقف ۶ ساعته‌ی گیت‌هاب تموم کن
 
@@ -55,9 +58,15 @@ jobs:
                   if not await client.is_user_authorized():
                       raise SystemExit("SESSION is invalid or expired - make a new one with get_session.py")
                   while time.time() < deadline:
-                      dice = " ".join(random.choice(FACES) for _ in range(3))
+                      roll = [random.randint(1, 6) for _ in range(3)]
+                      dice = " ".join(FACES[n - 1] for n in roll)
+                      key = "".join(map(str, roll))
+                      if key in LINES["special"]:   # ترکیب‌های موردعلاقه (۱ و ۲) همیشه جمله‌ی خاص خودشون رو دارن
+                          line = random.choice(LINES["special"][key])
+                      else:
+                          line = LINES[random.choice(["witty", "dev", "soft"])][key]
                       now = datetime.now(TZ).strftime("%H:%M")
-                      bio = template.replace("{time}", now).replace("{dice}", dice)[:70]
+                      bio = template.replace("{time}", now).replace("{dice}", dice).replace("{line}", line)[:70]
                       try:
                           await client(UpdateProfileRequest(about=bio))
                           print("Bio updated:", bio, flush=True)
