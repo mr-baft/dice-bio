@@ -30,9 +30,11 @@ jobs:
           SESSION: ${{ secrets.SESSION }}
           BIO_TEMPLATE: ${{ vars.BIO_TEMPLATE }}
           INTERVAL: ${{ vars.INTERVAL }}
+          GH_TOKEN: ${{ github.token }}
+          REF: ${{ github.ref_name }}
         run: |
           python - <<'EOF'
-          import os, random, asyncio, time, json
+          import os, random, asyncio, time, json, subprocess
           from datetime import datetime
           from zoneinfo import ZoneInfo
           from telethon import TelegramClient
@@ -47,7 +49,14 @@ jobs:
           interval = max(30, int(os.environ.get("INTERVAL") or 60))
           deadline = time.time() + 350 * 60   # چند دقیقه قبل از سقف ۶ ساعته‌ی گیت‌هاب تموم کن
 
+          def queue_next_run():
+              # اجرای بعدی رو توی صف می‌ذاره؛ به‌خاطر concurrency صبر می‌کنه و به‌محض تموم شدن این اجرا شروع می‌شه
+              r = subprocess.run(["gh", "workflow", "run", "dice.yml", "--ref", os.environ["REF"]],
+                                 capture_output=True, text=True)
+              print("Next run queued" if r.returncode == 0 else f"Could not queue next run: {r.stderr.strip()}", flush=True)
+
           async def main():
+              queued = False
               client = TelegramClient(
                   StringSession(os.environ["SESSION"]),
                   int(os.environ["API_ID"]),
@@ -70,11 +79,17 @@ jobs:
                       try:
                           await client(UpdateProfileRequest(about=bio))
                           print("Bio updated:", bio, flush=True)
-                          # تا شروع دقیقه‌ی بعد صبر کن تا ساعت توی بیو دقیق باشه
-                          await asyncio.sleep(interval - time.time() % interval)
+                          if not queued:   # فقط بعد از اولین آپدیت موفق، تا اجرای خراب پشت سر هم تکرار نشه
+                              queue_next_run()
+                              queued = True
                       except FloodWaitError as e:
                           print(f"Telegram asked to wait {e.seconds}s", flush=True)
-                          await asyncio.sleep(e.seconds + 5)
+                          await asyncio.sleep(min(e.seconds + 5, max(0, deadline - time.time())))
+                          continue
+                      except Exception as e:   # خطای موقت شبکه نباید کل اجرا رو بخوابونه
+                          print(f"Update failed, retrying next minute: {e!r}", flush=True)
+                      # تا شروع دقیقه‌ی بعد صبر کن تا ساعت توی بیو دقیق باشه
+                      await asyncio.sleep(interval - time.time() % interval)
               finally:
                   await client.disconnect()
 
@@ -82,7 +97,7 @@ jobs:
           EOF
 
       - name: Keep schedule alive
-        if: always() && github.event_name == 'schedule'
+        if: always()
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/dice.yml/enable" || true
