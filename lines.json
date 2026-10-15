@@ -1,4 +1,46 @@
 {
+  "special": {
+    "212": [
+      "212. the dice finally said my name.",
+      "two, one, two. that's my signature.",
+      "212 — not luck. just home.",
+      "out of 216 rolls, this one's mine.",
+      "212. i knew you'd come back."
+    ],
+    "121": [
+      "121 — 212's quiet twin.",
+      "one, two, one. my number in a mirror.",
+      "so close to 212 i can feel it."
+    ],
+    "211": [
+      "211. one step from my number.",
+      "two, one, one. almost home.",
+      "211 — 212 with a typo."
+    ],
+    "112": [
+      "112. my numbers, shuffled.",
+      "one, one, two. the pieces of me.",
+      "112 — the right digits, wrong order."
+    ],
+    "222": [
+      "all twos. the dice are on my side.",
+      "222. the two in me, three times.",
+      "two, two, two. my favorite echo."
+    ],
+    "221": [
+      "221. my digits, almost in place.",
+      "two, two, one. close to my number."
+    ],
+    "122": [
+      "122. a little bit of me in there.",
+      "one, two, two. my kind of roll."
+    ],
+    "111": [
+      "111. the one in 212, alone.",
+      "three ones. waiting for a two."
+    ]
+  },
+
   "witty": {
     "111": "luck said no. three times. politely.",
     "222": "two, two, two. the dice are stuck.",
